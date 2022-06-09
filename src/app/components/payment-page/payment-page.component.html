@@ -1,0 +1,70 @@
+<div class="container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="inputBox">
+            <span>Card Number</span>
+            <input type="text" class="card_num_input" 
+            id="cardNum"
+            formControlName="cardNum">
+            <div *ngIf="form.controls['cardNum'].invalid && (form.controls['cardNum'].dirty || form.controls['cardNum'].touched)" class="alert">
+                <div *ngIf="form.controls['cardNum'].errors?.['required']">Card Number is Required</div>
+                <div *ngIf="form.controls['cardNum'].errors?.['pattern']">Card Number must be 16 digits</div>
+            </div> 
+        </div>
+        <div class="inputBox">
+            <span>Card Holder</span>
+            <input type="text" class="card_holder_input"
+            id="cardHolder"
+            formControlName="cardHolder"
+            >
+            <div *ngIf="form.controls['cardHolder'].invalid && (form.controls['cardHolder'].dirty || form.controls['cardHolder'].touched)" class="alert">
+                <div *ngIf="form.controls['cardHolder'].errors?.['required']">Card Holder is Required</div>
+                <div *ngIf="form.controls['cardHolder'].errors?.['minlength']">Card Holder must be at least 2 characters long</div>
+            </div>  
+        </div>
+        <div class="inputBox">
+            <span>Amount</span>
+            <input type="number" class="amount_input"
+            id="amount"
+            formControlName="amount"
+            >
+            <div *ngIf="form.controls['amount'].invalid && (form.controls['amount'].dirty || form.controls['amount'].touched)" class="alert">
+                <div *ngIf="form.controls['amount'].errors?.['required']">Amount is Required</div>
+                <!-- <div *ngIf="form.controls['amount'].errors?.['pattern']">Invalid Amount</div> -->
+            </div> 
+        </div>
+        <div class="flexbox">
+            <div class="inputBox">
+                <span>Expiration mm</span>
+                <select name="" id="expirationMonth"  formControlName="expirationMonth" class="month_input">
+                    <option value="" selected disabled>month</option>
+                    <option *ngFor="let month of cardMonths">{{ month }}</option>
+                </select>
+            </div>
+            <div class="inputBox">
+                <span>Expiration yy</span>
+                <select name="" formControlName="expirationYear" id="expirationYear" class="year_input">
+                    <option value="" selected disabled>year</option>
+                    <option *ngFor="let year of cardYears">{{ year }}</option>
+                </select>
+            </div>
+            <div class="inputBox">
+                <span>CVV</span>
+                <input type="text" class="cvv_input"
+                id="securityCode"
+                formControlName="securityCode"
+                >
+                <div *ngIf="form.controls['securityCode'].invalid " class="alert">
+                    <div *ngIf="form.controls['securityCode'].errors?.['pattern']">CVV must be 3 digits</div>
+                </div> 
+           
+            </div>
+            
+        </div>
+        <button type="submit" class="submit_btn" >Submit</button>
+
+    </form>
+
+    <button class="home__btn" [routerLink]="'/home'">Go Back</button>
+    
+</div>
+
