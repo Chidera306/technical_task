@@ -1,27 +1,10 @@
-<router-outlet></router-outlet>
-
-<div class="card__wrap">
-  <h4>Testing NgRx</h4>
-<ul class="card">
-  <li *ngFor="let cardDetails of cardDetailss$ | async">
-    {{cardDetails.cardNum}}
-  </li>
-  <li *ngFor="let cardDetails of cardDetailss$ | async">
-    {{cardDetails.cardHolder}}
-  </li>
-  <li *ngFor="let cardDetails of cardDetailss$ | async">
-    {{cardDetails.expirationMonth}}
-  </li>
-  <li *ngFor="let cardDetails of cardDetailss$ | async">
-    {{cardDetails.expirationYear}}
-  </li>
-  <li *ngFor="let cardDetails of cardDetailss$ | async">
-    {{cardDetails.securityCode}}
-    <li *ngFor="let cardDetails of cardDetailss$ | async">
-      {{cardDetails.amount}}
-    </li>
- </ul>
+<div>
+  <router-outlet></router-outlet>
+  
 </div>
+
+
+
 
 
 

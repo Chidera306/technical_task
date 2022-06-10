@@ -17,7 +17,7 @@ import { AddItemAction } from '../store/models/Actions/cardDetail.action';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  cardDetailss$!: Observable<Array<cardDetails>>;
+  cardDetailss$!: Observable<cardDetails>;
 
   // private cardDetails: CardDetail;
 

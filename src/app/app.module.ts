@@ -6,10 +6,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { PaymentPageComponent } from './components/payment-page/payment-page.component';
 import { HomeComponent } from './components/home/home.component';
-import { ToastrModule } from 'ngx-toastr';
+import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { paymentReducer } from './components/store/models/reducers/cardDetails.reducer';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+
 
 
 @NgModule({
@@ -20,6 +24,9 @@ import { paymentReducer } from './components/store/models/reducers/cardDetails.r
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+
+    ToastNoAnimationModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,

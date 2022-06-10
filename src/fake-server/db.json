@@ -1,0 +1,10 @@
+{
+  "card_details": {
+    "cardNum": "3456677889990008",
+    "cardHolder": "dererr",
+    "expirationMonth": "7",
+    "expirationYear": "2023",
+    "securityCode": "345",
+    "amount": 344
+  }
+}

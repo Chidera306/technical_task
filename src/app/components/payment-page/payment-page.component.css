@@ -17,7 +17,13 @@
     align-items: center;
     justify-content: center;
     flex-flow: column;
-    padding-bottom: 60px;
+    padding-bottom: 50px;
+}
+
+.container h3 {
+    font-size: 30px;
+    color: #999;
+    letter-spacing: 5px;
 }
 
 .container form {
@@ -29,7 +35,7 @@
 }
 
 .container form .inputBox {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .container form .inputBox span {
@@ -93,3 +99,4 @@
     cursor: pointer;
     border-radius: 10px; 
 }
+

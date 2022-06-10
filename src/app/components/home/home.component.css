@@ -21,13 +21,13 @@ justify-items: center;
 .wrapper__container h1 {
     text-align: center;
     padding: 10px;
-    margin-top: 30px;
+    margin-top: 20px;
     color: #fff;
 }
 
 .wrapper__container__btn {
     width: 300px;
-    margin: 50px auto;
+    margin: 20px auto;
 }
 
 .wrapper__container__btn .btn {
@@ -47,3 +47,26 @@ justify-items: center;
     letter-spacing: 2px;
     border: 1px solid #fff;
 }
+
+/* ngrx */
+.card__wrap {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: 50%;
+    padding: 10px;
+    max-width: 300px;
+    background-color: rgb(56, 185, 185);
+ }
+
+ .card__wrap h4 {
+    margin-top: 10px;
+ }
+
+ .card li {
+     width: 100%;
+     margin-top: 10px;
+     padding: 10px;
+     border: 1px solid #333;
+     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+     color: #fff;
+ }
+ 

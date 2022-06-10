@@ -11,12 +11,12 @@ import { State } from './components/store/state.model'
 })
 export class AppComponent implements OnInit {
   title = 'speedkashApp';
-  
-  cardDetailss$!: Observable<Array<cardDetails>>;
 
-  constructor(private store: Store<State>) {}
-ngOnInit(): void {
-  this.cardDetailss$ = this.store.select((store) => store.payments)
-}
-  
+  cardDetailss$!: Observable<cardDetails>;
+
+  constructor(private store: Store<State>) { }
+  ngOnInit(): void {
+    this.cardDetailss$ = this.store.select((store) => store.payments)
+  }
+
 }

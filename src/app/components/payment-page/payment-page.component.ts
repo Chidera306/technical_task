@@ -1,22 +1,14 @@
 
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { SpeedkashService } from 'src/fake-server/speedkash.service';
+import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { SpeedkashService } from 'src/app/services/speedkash.service';
 
-import { Observable, Subject } from 'rxjs';
-import {
-  tap,
-  switchMap,
-  debounceTime,
-  distinctUntilChanged,
-} from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
-import { CardDetail } from 'src/fake-server/cardDetail.data';
 import { Store } from '@ngrx/store';
-import { cardDetails } from '../store/models/cardDetails.model';
+import { CardDetail } from 'src/fake-server/cardDetail.data';
+import { PutItemAction } from '../store/models/Actions/cardDetail.action';
 import { State } from '../store/state.model';
-import { FormsModule, NgForm } from '@angular/forms';
-import { AddItemAction } from '../store/models/Actions/cardDetail.action';
 
 @Component({
   selector: 'app-payment-page',
@@ -24,7 +16,7 @@ import { AddItemAction } from '../store/models/Actions/cardDetail.action';
   styleUrls: ['./payment-page.component.css']
 })
 export class PaymentPageComponent implements OnInit {
-cardDetails$!: Observable<CardDetail[]>;
+  cardDetails$!: Observable<CardDetail[]>;
 
   cardHolder = "";
   cardNum = "";
@@ -37,24 +29,25 @@ cardDetails$!: Observable<CardDetail[]>;
 
 
   form: FormGroup;
-  constructor(public fb: FormBuilder, private speedkashService: SpeedkashService, private store: Store<State>) { 
+  get Amount(): FormControl { return this.form.get('amount') as FormControl; }
+  constructor(public fb: FormBuilder, private speedkashService: SpeedkashService, private store: Store<State>) {
 
     this.form = this.fb.group({
-      cardNum:  new FormControl('',  [Validators.required, Validators.pattern('[0-9]{16}')]),
-      cardHolder:  new FormControl('', [Validators.required, Validators.minLength(2)]),
-      securityCode: new FormControl('',  [Validators.pattern('^[0-9]{3}$')]),
-      expirationMonth:  ['', Validators.required],
+      cardNum: new FormControl('', [Validators.required, Validators.pattern('[0-9]{16}')]),
+      cardHolder: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      securityCode: new FormControl('', [Validators.pattern('^[0-9]{3}$')]),
+      expirationMonth: ['', Validators.required],
       expirationYear: ['', Validators.required],
-      amount: ['', Validators.required, Validators.pattern('^[1-9][0-9]*$')]
+      amount: ['', [Validators.required, Validators.pattern('^[1-9][0-9]*$'), Validators.min(1)]]
     })
 
-   
+
   }
 
   ngOnInit(): void {
     // this.cardDetailss$ = this.store.select((store) => store.payments);
 
-    const startMonth: number = new Date().getMonth() +1;
+    const startMonth: number = new Date().getMonth() + 1;
     console.log('startMonth: + startMonth');
     this.speedkashService.getCardMonths(startMonth).subscribe(
       data => {
@@ -71,7 +64,7 @@ cardDetails$!: Observable<CardDetail[]>;
     )
 
 
-   
+
   }
 
   get paymentForm() {
@@ -80,19 +73,17 @@ cardDetails$!: Observable<CardDetail[]>;
 
   onSubmit() {
     this.submitted = true;
-    
+
     if (this.form.invalid) {
+
       return;
     }
-    // console.log(this.form.value);
+    this.store.dispatch(new PutItemAction(this.form.value));
+    this.speedkashService.createDatabase()
+
+    console.log(this.form.value);
+    this.form.reset()
   }
-
-
-
-  addPayment(form:any) {
-    this.store.dispatch(new AddItemAction(form.value));
-    form.reset();
-  }
-
+ 
 
 }
